@@ -18,10 +18,10 @@ Department.hasMany(Role, {
 });
 
 // Employee belongs to Role
-Employee.belongsTo(Role, {
-  foreignKey: "role_id",
-  onDelete: "CASCADE",
-});
+// Employee.belongsTo(Role, {
+//   foreignKey: "role_id",
+//   onDelete: "CASCADE",
+// });
 
 // Role has one Employee
 Role.hasOne(Employee, {

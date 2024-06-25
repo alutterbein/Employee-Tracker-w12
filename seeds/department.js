@@ -3,7 +3,7 @@
 const sequelize = require("../connection");
 const Department = require("../Models/department");
 
-const departmentsSeedData = require("./departmentSeed.json");
+const departmentsData = require("./departmentSeed.json");
 
 const seedDepartmentData = async () => {
   await sequelize.sync({ force: true });

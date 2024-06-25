@@ -1,68 +1,68 @@
-
+// Importing Department, Role, & Employee models from the models folder -> blueprint of our tables
 const { Department, Role, Employee } = require("./Models");
-const inquirer = require('inquirer');
-const sequalize = require("./connection");
 
+// Importing sequelize which is our telephone to the database it allows javascript to talk with mysql
+const sequelize = require("./connection");
 
+// Importing inquirer (for prompting user)
+const inquirer = require("inquirer");
+
+// Syncs the database with created models
 sequelize.sync({ force: false }).then(() => {
   options();
 });
 
-
-//inquirer prompts
+// Function written to prompt the user with different options to navigate the database
 function options() {
-inquirer
-  .prompt([
-    {
-      type: 'list',
-      message: 'What would you like to do?',
-      choices: [
-        'View all Departments',
-        'View all roles',
-        'View all employees',
-        'Add a Department',
-        'Add a role',
-        'Add an employee',
-        'Update employee role',
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        message: "What would you like to do?",
+        choices: [
+          "View All Departments",
+          "View All Roles",
+          "View All Employees",
+          "Add Department",
+          "Add Role",
+          "Add Employee",
+          "Update Employee Role",
+          //   `(Move up and down to reveal more choices)`,
+        ],
+        name: "employeeTracker",
+      },
+    ])
+    // Takes in user choice, checks with equality, and then fires off corresponding function
+    .then((answer) => {
+      if (answer.employeeTracker === "View All Departments") {
+        viewAllDepartments();
+      } else if (answer.employeeTracker === "View All Roles") {
+        viewAllRoles();
+      } else if (answer.employeeTracker === "View All Employees") {
+        viewAllEmployees();
+      } else if (answer.employeeTracker === "Add Department") {
+        addDepartment();
+      } else if (answer.employeeTracker === "Add Role") {
+        addRole();
+      } else if (answer.employeeTracker === "Add Employee") {
+        addEmployee();
+      } else {
+        updateEmployeeRole();
+      }
+    });
+}
 
-      ],
-    },
-   
-  ])
-  .then((answers) => {
-    const { choices } = answers;
+// -------------- VIEW -----------------
 
-    if (choices === 'View All Departments') {
-      viewAllDepartments();
-    }
-    if (choices === 'View All Roles') {
-      viewAllRoles();
-    }
-    if (choices === 'View All Employees') {
-      viewAllEmployees();
-    }
-    if (choices === 'Add Department') {
-      addDepartment();
-    }
-    if (choices === 'Add Role') {
-      addRole();
-    }
-    if (choices === 'Add Employee') {
-      addEmployee();
-    }
-
-    if (choices === 'Update Employee Role') {
-      updateEmployeeRole();
-    }
-
-    if (choices === 'Exit') {
-      connection.end();
-    }
-    console.log(JSON.stringify(answers, null, '  '));
+// View all departments
+const viewAllDepartments = () => {
+  var departments = Department.findAll({ raw: true }).then((data) => {
+    console.table(data);
+    // Fires off prompts after table is displayed
+    options();
   });
 };
 
-// Create a department
 // View all roles
 const viewAllRoles = () => {
   var roles = Role.findAll({
@@ -119,7 +119,7 @@ const viewAllEmployees = () => {
   });
 };
 
-// prompts for inquirer... instead of a website
+// -------------- ADD -----------------
 
 // Add department
 const addDepartment = () => {
@@ -308,12 +308,3 @@ const updateEmployeeRole = async () => {
       });
     });
 };
-// Default response for any other request (Not Found)
-app.use((req, res) => {
-  res.status(404).end();
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-
