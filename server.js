@@ -1,31 +1,12 @@
-const express = require('express');
+
 const { Department, Role, Employee } = require("./Models");
-// Import and require mysql2
-const mysql = require('mysql2');
-const inquirer = require('inquirer')
-const PORT = process.env.PORT || 3001;
-const app = express();
+const inquirer = require('inquirer');
+const sequalize = require("./connection");
+
+
 sequelize.sync({ force: false }).then(() => {
   options();
 });
-// Express middleware
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
-// Connect to database
-const Sequelize = require("sequelize");
-require("dotenv").config();
-
-var sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
-  {
-    host: "localhost",
-    dialect: "mysql",
-    port: 3306,
-  }
-);
 
 
 //inquirer prompts
@@ -82,7 +63,7 @@ inquirer
 };
 
 // Create a department
-a// View all roles
+// View all roles
 const viewAllRoles = () => {
   var roles = Role.findAll({
     raw: true,
