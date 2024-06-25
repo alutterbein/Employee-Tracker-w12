@@ -1,7 +1,7 @@
 // Model for department table
 
 const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../server.js");
+const sequelize = require("../server");
 
 class Department extends Model {}
 

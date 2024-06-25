@@ -1,28 +1,35 @@
 const express = require('express');
+const { Department, Role, Employee } = require("./Models");
 // Import and require mysql2
 const mysql = require('mysql2');
 const inquirer = require('inquirer')
 const PORT = process.env.PORT || 3001;
 const app = express();
-
+sequelize.sync({ force: false }).then(() => {
+  options();
+});
 // Express middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Connect to database
-const db = mysql.createConnection(
+const Sequelize = require("sequelize");
+require("dotenv").config();
+
+var sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
   {
-    host: 'localhost',
-    // MySQL username,
-    user: 'root',
-    // TODO: Add MySQL password here
-    // password: ommitted for now,
-    database: 'assets_db'
-  },
-  console.log(`Connected to the assets_db database.`)
+    host: "localhost",
+    dialect: "mysql",
+    port: 3306,
+  }
 );
 
+
 //inquirer prompts
+function options() {
 inquirer
   .prompt([
     {
@@ -70,9 +77,9 @@ inquirer
     if (choices === 'Exit') {
       connection.end();
     }
+    console.log(JSON.stringify(answers, null, '  '));
   });
-console.log(JSON.stringify(answers, null, '  '));
-
+};
 
 // Create a department
 a// View all roles

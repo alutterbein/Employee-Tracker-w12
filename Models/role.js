@@ -1,7 +1,7 @@
 // Model for structuring role table
 
 const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../server.js");
+const sequelize = require("../server");
 
 class Role extends Model {}
 

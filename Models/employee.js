@@ -1,7 +1,7 @@
 // Model for structuring employee table
 
 const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../server.js");
+const sequelize = require("../server");
 
 class Employee extends Model {}
 
