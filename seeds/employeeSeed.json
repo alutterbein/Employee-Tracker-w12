@@ -1,0 +1,38 @@
+[
+    {
+      "first_name": "John",
+      "last_name": "Doe",
+      "role_id": 1,
+      "manager_id": null
+    },
+    {
+      "first_name": "jane",
+      "last_name": "Doe",
+      "role_id": 2,
+      "manager_id": 1
+    },
+    {
+      "first_name": "Dusty",
+      "last_name": "Roads",
+      "role_id": 3,
+      "manager_id": null
+    },
+    {
+      "first_name": "James",
+      "last_name": "Bond",
+      "role_id": 4,
+      "manager_id": 3
+    },
+    {
+      "first_name": "Arnold",
+      "last_name": "Armstrong",
+      "role_id": 5,
+      "manager_id": null
+    },
+    {
+      "first_name": "Doctor",
+      "last_name": "Brown",
+      "role_id": 6,
+      "manager_id": 1
+    }
+]
